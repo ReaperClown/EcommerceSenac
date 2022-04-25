@@ -1,0 +1,42 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    padding-top: 85px;
+}
+
+.body-content {
+    padding-left: 55px;
+    padding-right: 55px;
+}
+
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.my-footer, #myFooter {
+    text-align: center;
+    height: 60px;
+    line-height: 40px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+    .jumbotron {
+        margin-top: 20px;
+    }
+
+    .body-content {
+        padding: 0;
+    }
+}
