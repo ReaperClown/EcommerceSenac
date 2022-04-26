@@ -13,6 +13,16 @@
     border: 0px solid #000;
 }
 
+.table-responsive {
+    max-height: 300px;
+}
+
+#itemsPedido {
+    margin-left: auto;
+    margin-right: auto;
+    display: none;
+}
+
 .table-tipopag a {
     text-decoration: none;
     color: aquamarine;

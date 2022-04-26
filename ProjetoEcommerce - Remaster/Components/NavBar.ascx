@@ -18,7 +18,7 @@
                 <a class="nav-link px-3" runat="server" href="~/Pedido">Pedido</a>
             </div>
         </div>
-        <form class="d-flex">
+        <form class="d-flex collapse">
             <input class="form-control me-2" type="search" placeholder="Pesquisar..." aria-label="Pesquisar">
             <button class="btn btn-success" type="submit">Pesquisar</button>
         </form>

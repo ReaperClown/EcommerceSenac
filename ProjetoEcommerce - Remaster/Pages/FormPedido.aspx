@@ -20,16 +20,15 @@
     <style>
         .ui-datepicker-title select {
             display: inline;
-            
         }
     </style>
     <title>Pedido</title>
 </head>
-<body class="d-flex flex-column h-100">
+<body>
     <form id="form1" runat="server">
         <TNav:navbar ID="myNav" runat="server" />
 
-        <div class="container body-content flex-shrink-0">
+        <div class="content">
             <div class="container body-content">
                 <div class="container">
                     <table class="table table-bordered table-responsive align-middle text-center my-table" style="width: 100%;">
@@ -43,14 +42,14 @@
                                 <asp:Label ID="Label2" runat="server" Text="Cliente"></asp:Label>
                             </td>
                             <td style="width: 275px">
-                                <asp:DropDownList ID="DropDownList1" CssClass="form-select" runat="server">
+                                <asp:DropDownList ID="dropCliente" CssClass="form-select" runat="server">
                                 </asp:DropDownList>
                             </td>
                             <td style="width: 300px">
                                 <asp:Label ID="Label5" runat="server" Text="Produto"></asp:Label>
                             </td>
                             <td style="width: 275px">
-                                <asp:DropDownList ID="DropDownList2" CssClass="form-select" runat="server">
+                                <asp:DropDownList ID="dropProduto" CssClass="form-select" runat="server">
                                 </asp:DropDownList>
                             </td>
                         </tr>
@@ -59,14 +58,14 @@
                                 <asp:Label ID="Label3" runat="server" Text="Tipo de Pagamento"></asp:Label>
                             </td>
                             <td style="width: 275px">
-                                <asp:DropDownList ID="DropDownList3" CssClass="form-select" runat="server">
+                                <asp:DropDownList ID="dropPagamento" CssClass="form-select" runat="server">
                                 </asp:DropDownList>
                             </td>
                             <td style="width: 300px">
                                 <asp:Label ID="Label6" runat="server" Text="Quantidade"></asp:Label>
                             </td>
                             <td style="width: 275px">
-                                <asp:TextBox ID="TextBox1" CssClass="form-control" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtQtd" CssClass="form-control" runat="server"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
@@ -74,13 +73,13 @@
                                 <asp:Label ID="Label4" runat="server" Text="Valor Unitário"></asp:Label>
                             </td>
                             <td style="width: 275px">
-                                <asp:TextBox ID="TextBox2" CssClass="form-control" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtVunit" CssClass="form-control" runat="server"></asp:TextBox>
                             </td>
                             <td style="width: 300px">
                                 <asp:Label ID="Label7" runat="server" Text="Subtotal"></asp:Label>
                             </td>
                             <td style="width: 275px">
-                                <asp:TextBox ID="TextBox3" CssClass="form-control" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtSub" CssClass="form-control" runat="server"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
@@ -88,7 +87,7 @@
                                 <asp:Label ID="Label8" runat="server" Text="Valor Total"></asp:Label>
                             </td>
                             <td style="width: 275px">
-                                <asp:TextBox ID="TextBox4" CssClass="form-control" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtTotal" CssClass="form-control" runat="server"></asp:TextBox>
                             </td>
                             <td style="width: 300px">
                                 <asp:Label ID="Label9" runat="server" Text="Data do Pedido"></asp:Label>
@@ -116,7 +115,32 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4"></td>
+                            <td colspan="2" style="text-align: right">
+                                <button class="btn btn-success" runat="server" id="btnInsert">Inserir</button>
+                                </td>
+                            <td colspan="2" style="text-align: left">
+                                <button class="btn btn-danger" runat="server" id="btnClean">Limpar</button>
+
+                                </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered align-middle text-center my-table" style="width: 600px;" runat="server" id="itemsPedido">
+                                    <tr>
+                                        <th colspan="4" style="text-transform: uppercase">Items do Pedido</th>
+                                    </tr>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>ID do Pedido</th>
+                                        <th>Quantidade</th>
+                                        <th>Valor Unitário</th>
+                                    </tr>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                                </div>
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -129,27 +153,22 @@
     <script src="../Content/jquery-ui/datepicker-pt-BR.js"></script>
     <script src="../Scripts/bootstrap.min.js"></script>
     <script src="../Scripts/popper.min.js"></script>
+    <script src="../Scripts/Pages/Pedido.js"></script>
+
     <script>
-        $(".datepicker").datepicker({
-            inline: true,
-            dateFormat: "dd/mm/yy",
-            changeMonth: true,
-            changeYear: true,
-            showAnim: "blind",
-            showButtonPanel: true,
-            currentText: "Hoje",
-            closeText: "Feito"
-        });
+        $("#btnInsert").click(function (e) {
+            e.preventDefault();
 
-        $.datepicker._gotoToday = function (id) {
-            $(id).datepicker('setDate', new Date()).datepicker('hide').blur();
-        };
+            $("#itemsPedido").show();
 
-        $(".datepicker").datepicker($.datepicker.regional["pt-BR"]);
+            var rows = "";
+            var id = document.getElementById('<%= dropProduto.ClientID %>').selectedIndex;
+            var pedido_id = "";
+            var qtd = document.getElementById('<%= txtQtd.ClientID %>').value;
+            var vunit = document.getElementById('<%= txtVunit.ClientID %>').value;
 
-        $(".ui-datepicker td").each(function () {
-            var dateText = $(this).find("a").text();
-            $(this).find("a").html("<span>" + dateText + "</span>");
+            rows += "<tr><td>" + id + "</td><td>" + pedido_id + "</td><td>" + qtd + "</td><td>" + vunit + "</td></tr>";
+            $(rows).appendTo("#itemsPedido tbody");
         });
     </script>
 </body>

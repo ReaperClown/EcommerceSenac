@@ -9,6 +9,13 @@
 
 body {
     padding-top: 85px;
+    height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.content {
+    flex: 1 !important;
 }
 
 .body-content {
@@ -24,11 +31,7 @@ textarea {
 
 .my-footer, #myFooter {
     text-align: center;
-    height: 60px;
     line-height: 40px;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
 }
 
 @media screen and (min-width: 768px) {
