@@ -9,10 +9,6 @@
     text-transform: uppercase;
 }
 
-.my-table thead th {
-
-}
-
 .table-condensed, .table-condensed tr td {
     border: 0px solid #000;
 }

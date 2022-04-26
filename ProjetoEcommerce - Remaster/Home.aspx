@@ -9,7 +9,7 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="Content/css/default.css" rel="stylesheet" />
-    <link href="~/Content/vendor/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/vendor/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet" />
     <title>Home</title>
 </head>

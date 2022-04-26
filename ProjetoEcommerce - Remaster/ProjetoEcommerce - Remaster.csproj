@@ -83,9 +83,29 @@
     <Content Include="Content\css\produto.css" />
     <Content Include="Content\css\tipopag.css" />
     <Content Include="Content\img\ecommerce-icon.png" />
+    <Content Include="Content\jquery-ui\datepicker-pt-BR.js" />
+    <Content Include="Content\jquery-ui\external\jquery\jquery.js" />
+    <Content Include="Content\jquery-ui\images\ui-bg_diagonals-thick_8_333333_40x40.png" />
+    <Content Include="Content\jquery-ui\images\ui-bg_glass_40_111111_1x400.png" />
+    <Content Include="Content\jquery-ui\images\ui-bg_glass_55_1c1c1c_1x400.png" />
+    <Content Include="Content\jquery-ui\images\ui-bg_highlight-hard_100_f9f9f9_1x100.png" />
+    <Content Include="Content\jquery-ui\images\ui-bg_highlight-hard_40_aaaaaa_1x100.png" />
+    <Content Include="Content\jquery-ui\images\ui-bg_highlight-soft_50_aaaaaa_1x100.png" />
+    <Content Include="Content\jquery-ui\images\ui-bg_inset-hard_45_cd0a0a_1x100.png" />
+    <Content Include="Content\jquery-ui\images\ui-bg_inset-hard_55_ffeb80_1x100.png" />
+    <Content Include="Content\jquery-ui\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\jquery-ui\images\ui-icons_4ca300_256x240.png" />
+    <Content Include="Content\jquery-ui\images\ui-icons_bbbbbb_256x240.png" />
+    <Content Include="Content\jquery-ui\images\ui-icons_ededed_256x240.png" />
+    <Content Include="Content\jquery-ui\images\ui-icons_ffcf29_256x240.png" />
+    <Content Include="Content\jquery-ui\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\jquery-ui\jquery-ui.css" />
+    <Content Include="Content\jquery-ui\jquery-ui.js" />
+    <Content Include="Content\jquery-ui\jquery-ui.structure.css" />
+    <Content Include="Content\jquery-ui\jquery-ui.theme.css" />
     <Content Include="Content\vendor\bootstrap.css" />
     <Content Include="Content\vendor\bootstrap.min.css" />
-    <Content Include="FormPedido.aspx" />
+    <Content Include="Pages\FormPedido.aspx" />
     <Content Include="Components\NavBar.ascx" />
     <Content Include="Content\vendor\bootstrap.css.map" />
     <Content Include="Content\vendor\bootstrap.min.css.map" />
@@ -132,11 +152,11 @@
     <Compile Include="Components\Footer.ascx.designer.cs">
       <DependentUpon>Footer.ascx</DependentUpon>
     </Compile>
-    <Compile Include="FormPedido.aspx.cs">
+    <Compile Include="Pages\FormPedido.aspx.cs">
       <DependentUpon>FormPedido.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="FormPedido.aspx.designer.cs">
+    <Compile Include="Pages\FormPedido.aspx.designer.cs">
       <DependentUpon>FormPedido.aspx</DependentUpon>
     </Compile>
     <Compile Include="Components\NavBar.ascx.cs">

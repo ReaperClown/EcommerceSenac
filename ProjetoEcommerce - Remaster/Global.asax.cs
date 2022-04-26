@@ -32,24 +32,29 @@ namespace ProjetoEcommerce___Remaster
         void RegisterCustomRoutes(RouteCollection routes)
         {
             routes.MapPageRoute(
+                "Home",
+                "Home/",
+                "~/Home.aspx"
+            );
+            routes.MapPageRoute(
                 "Cliente",
                 "Cliente/",
-                "~/FormCliente.aspx"
+                "~/Pages/FormCliente.aspx"
             );
             routes.MapPageRoute(
                 "Produto",
                 "Produto/",
-                "~/FormProduto.aspx"
+                "~/Pages/FormProduto.aspx"
             );
             routes.MapPageRoute(
                 "Tipo_Pagamento",
                 "Tipo_Pagamento/",
-                "~/FormTipoPagamento.aspx"
+                "~/Pages/FormTipoPagamento.aspx"
             );
             routes.MapPageRoute(
                 "Pedido",
                 "Pedido",
-                "~/FormPedido.aspx"
+                "~/Pages/FormPedido.aspx"
             );
         }
     }
