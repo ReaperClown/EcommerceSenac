@@ -12,9 +12,9 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav my-nav mx-auto">
                 <a class="nav-link px-3" runat="server" href="~/">Página inicial</a>
-<%--                <a class="nav-link px-3" runat="server" href="~/Cliente">Cliente</a>
+                <a class="nav-link px-3" runat="server" href="~/Cliente">Cliente</a>
                 <a class="nav-link px-3" runat="server" href="~/Produto">Produto</a>
-                <a class="nav-link px-3" runat="server" href="~/Tipo_Pagamento">Tipos de Pagamento</a>--%>
+                <a class="nav-link px-3" runat="server" href="~/Tipo_Pagamento">Tipos de Pagamento</a>
                 <a class="nav-link px-3" runat="server" href="~/Pedido">Pedido</a>
             </div>
         </div>
