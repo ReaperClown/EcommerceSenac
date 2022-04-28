@@ -43,6 +43,7 @@
                             </td>
                             <td style="width: 275px">
                                 <asp:DropDownList ID="dropCliente" CssClass="form-select" runat="server">
+                                    <asp:ListItem>Selecione o cliente</asp:ListItem>
                                 </asp:DropDownList>
                             </td>
                             <td style="width: 300px">
@@ -50,6 +51,7 @@
                             </td>
                             <td style="width: 275px">
                                 <asp:DropDownList ID="dropProduto" CssClass="form-select" runat="server">
+                                    <asp:ListItem>Selecione o produto</asp:ListItem>
                                 </asp:DropDownList>
                             </td>
                         </tr>
@@ -59,6 +61,7 @@
                             </td>
                             <td style="width: 275px">
                                 <asp:DropDownList ID="dropPagamento" CssClass="form-select" runat="server">
+                                    <asp:ListItem>Selecione o tipo de pagamento</asp:ListItem>
                                 </asp:DropDownList>
                             </td>
                             <td style="width: 300px">
@@ -117,28 +120,29 @@
                         <tr>
                             <td colspan="2" style="text-align: right">
                                 <button class="btn btn-success" runat="server" id="btnInsert">Inserir</button>
-                                </td>
+                            </td>
                             <td colspan="2" style="text-align: left">
                                 <button class="btn btn-danger" runat="server" id="btnClean">Limpar</button>
 
-                                </td>
+                            </td>
                         </tr>
                         <tr>
                             <td colspan="4">
+                                <div id="displayMyAlert"></div>
                                 <div class="table-responsive">
                                     <table class="table table-bordered align-middle text-center my-table" style="width: 600px;" runat="server" id="itemsPedido">
-                                    <tr>
-                                        <th colspan="4" style="text-transform: uppercase">Items do Pedido</th>
-                                    </tr>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>ID do Pedido</th>
-                                        <th>Quantidade</th>
-                                        <th>Valor Unitário</th>
-                                    </tr>
-                                    <tbody>
-                                    </tbody>
-                                </table>
+                                        <tr>
+                                            <th colspan="4" style="text-transform: uppercase">Items do Pedido</th>
+                                        </tr>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>ID do Pedido</th>
+                                            <th>Quantidade</th>
+                                            <th>Valor Unitário</th>
+                                        </tr>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </td>
                         </tr>
@@ -156,19 +160,41 @@
     <script src="../Scripts/Pages/Pedido.js"></script>
 
     <script>
+        var id = document.getElementById('<%= dropProduto.ClientID %>').selectedIndex;
+        var pedido_id = "";
+        var qtd = document.getElementById('<%= txtQtd.ClientID %>').value;
+        var vunit = document.getElementById('<%= txtVunit.ClientID %>').value;
+        var alertPlaceholder = document.getElementById('displayMyAlert')
+        var count = 0;
+
         $("#btnInsert").click(function (e) {
             e.preventDefault();
 
-            $("#itemsPedido").show();
+            if (qtd == "" || vunit == "" || id < 0) {
+                if (count == 0) {
+                    function alert() {
+                        var wrapper = document.createElement('div')
+                        wrapper.innerHTML = '<div class="alert alert-danger alert-dismissible d-flex align-items-center" id="myAlert" role="alert">' + '<i class="fa-solid fa-triangle-exclamation bi flex-shrink-0 me-2" role="img" aria-label="Danger:"></i>' + '<div>Por favor, preencha todos os campos.</div>' + '<button type="button" id="alertClose" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
 
-            var rows = "";
-            var id = document.getElementById('<%= dropProduto.ClientID %>').selectedIndex;
-            var pedido_id = "";
-            var qtd = document.getElementById('<%= txtQtd.ClientID %>').value;
-            var vunit = document.getElementById('<%= txtVunit.ClientID %>').value;
+                        alertPlaceholder.append(wrapper)
+                    }
+                    alert();
+                    count++
+                }
+                $('#myAlert').on('closed.bs.alert', function (e) {
+                    e.preventDefault();
+                    count = 0
+                });
 
-            rows += "<tr><td>" + id + "</td><td>" + pedido_id + "</td><td>" + qtd + "</td><td>" + vunit + "</td></tr>";
-            $(rows).appendTo("#itemsPedido tbody");
+            }
+            else {
+                $("#itemsPedido").show();
+
+                var rows = "";
+
+                rows += "<tr><td>" + id + "</td><td>" + pedido_id + "</td><td>" + qtd + "</td><td>" + vunit + "</td></tr>";
+                $(rows).appendTo("#itemsPedido tbody");
+            }
         });
     </script>
 </body>
