@@ -1,6 +1,5 @@
 ﻿body {
     width: 100%;
-    margin: 5px;
 }
 
 .table-condensed tr th {
@@ -14,17 +13,20 @@
     border: 0px solid #000;
 }
 
-.my-content > .btn:not(:last-child) {
-    margin-right: 20px !important;
-}
-
-.my-content {
-    float: right;
-}
-
 .table-produto a {
     text-decoration: none;
     color: aquamarine;
+}
+
+img.prodImg {
+    position: absolute;
+}
+
+.img-container {
+    height: 100px;
+    width: 100px;
+    overflow: hidden;
+    position: relative;
 }
 
 #btnInsertPag, #btnInsertCli {

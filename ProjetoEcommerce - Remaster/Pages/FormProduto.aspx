@@ -12,7 +12,7 @@
     <link href="../Content/vendor/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet" />
 
-    <link href="../Content/css/produto.css" rel="stylesheet" />
+    <link href="../Content/css/e-produto.css" rel="stylesheet" />
     <%--<link href="../Content/jquery-ui/jquery-ui.css" rel="stylesheet" />
     <link href="../Content/jquery-ui/jquery-ui.structure.css" rel="stylesheet" />
     <link href="../Content/jquery-ui/jquery-ui.theme.css" rel="stylesheet" />--%>
@@ -70,7 +70,7 @@
                         </tr>
                         <tr>
                             <td colspan="2" style="text-align: right">
-                                <asp:Button ID="btnInsert" runat="server" CssClass="btn btn-success" Text="Inserir" OnClick="btnInsert_Click" UseSubmitBehavior="False" />
+                                <button type="button" class="btn btn-success" id="btnInsert" runat="server">Inserir</button>
                             </td>
                             <td colspan="2" style="text-align: left">
                                 <asp:Button ID="btnClean" runat="server" CssClass="btn btn-danger" Text="Limpar" />
@@ -99,10 +99,17 @@
                         <asp:BoundField DataField="descricao" HeaderText="descricao" SortExpression="descricao" />
                         <asp:BoundField DataField="valorunitario" HeaderText="valorunitario" SortExpression="valorunitario" />
                         <asp:BoundField DataField="quantidadelimite" HeaderText="quantidadelimite" SortExpression="quantidadelimite" />
-                        <asp:BoundField DataField="imagem" HeaderText="imagem" SortExpression="imagem" />
+                        <asp:TemplateField>
+                            <HeaderTemplate>Imagem</HeaderTemplate>
+                            <ItemTemplate>
+                                <div class="img-container">
+                                    <img class="prodImg" src='data:image/jpg;base64,<%# Eval("imagem") != System.DBNull.Value ? Convert.ToBase64String((byte[])Eval("imagem")) : string.Empty %>' alt="image" />
+                                </div>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
-                <asp:SqlDataSource ID="DataSourceProduct" runat="server" ConnectionString="<%$ ConnectionStrings:DBEcommerce %>" SelectCommand="SELECT * FROM [produto]"></asp:SqlDataSource>
+                <asp:SqlDataSource ID="DataSourceProduct" runat="server" ConnectionString="<%$ ConnectionStrings:DBEcommerce - Work %>" SelectCommand="SELECT * FROM [produto]"></asp:SqlDataSource>
             </div>
         </div>
         <TFooter:footer runat="server" ID="Footer" />
@@ -115,6 +122,60 @@
     <script type="text/javascript">
         $(":file").filestyle({ text: "Procurar" });
         $(":file").filestyle({ placeholder: "Nenhum arquivo selecionado" });
+
+        $(function () {
+            var reader = new FileReader();
+            var fileName;
+            var contentType;
+            $('input[type=file]').change(function () {
+                if (typeof (FileReader) != "undefined") {
+                    var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+                    $($(this)[0].files).each(function () {
+                        var file = $(this);
+                        if (regex.test(file[0].name.toLowerCase())) {
+                            fileName = file[0].name;
+                            contentType = file[0].type;
+                            reader.readAsDataURL(file[0]);
+                        } else {
+                            alert(file[0].name + " is not a valid image file.");
+                            return false;
+                        }
+                    });
+                } else {
+                    alert("This browser does not support HTML5 FileReader.");
+                }
+            });
+
+            $("[id*=btnInsert]").bind("click", function () {
+                var byteData = reader.result;
+                byteData = byteData.split(';')[1].replace("base64,", "");
+
+                var prod = {};
+                prod.Nome = $("[id*=txtNome]").val();
+                prod.Quantidade = $("[id*=txtQtd]").val();
+                prod.Descricao = $("[id*=txtDesc]").val();
+                prod.ValorUnitario = $("[id*=txtVunit]").val();
+                prod.QuantidadeLimite = $("[id*=txtLimit]").val();
+                prod.Imagem = byteData;
+                var ajaxOptions = {
+                    type: "POST",
+                    url: "Pages/FormProduto.aspx/SaveProd",
+                    data: '{Nome: "' + prod.Nome + '", Quantidade: "' + prod.Quantidade + '", Descricao: "' + prod.Descricao + '", ValorUnitario: "' + prod.ValorUnitario + '", QuantidadeLimite: "' + prod.QuantidadeLimite + '", Imagem: "' + prod.Imagem + '" }',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        alert("Product has been added successfully.");
+                        window.location.reload();
+                    },
+                    error: (error) => {
+                        console.log(JSON.stringify(error));
+                    }
+                };
+                console.log('my data: ' + ajaxOptions.url + ' ' + JSON.stringify(ajaxOptions.data));
+                $.ajax(ajaxOptions);
+                return false;
+            });
+        });
     </script>
 </body>
 </html>

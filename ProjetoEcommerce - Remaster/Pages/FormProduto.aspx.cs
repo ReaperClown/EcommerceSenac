@@ -52,39 +52,32 @@ namespace ProjetoEcommerce___Remaster.Pages
 
         protected void btnInsert_Click(object sender, EventArgs e)
         {
-                string constr = ConfigurationManager.ConnectionStrings["DBEcommerce"].ConnectionString;
-
-                int imagefilelenth = fUpImg.PostedFile.ContentLength;
-                byte[] imgarray = new byte[imagefilelenth];
-                HttpPostedFile image = fUpImg.PostedFile;
-                image.InputStream.Read(imgarray, 0, imagefilelenth);
-
-                using (SqlConnection con = new SqlConnection(constr))
-                {
-                    using (SqlCommand cmd = new SqlCommand("INSERT INTO produto VALUES(@nome, @quantidade, @descricao, @valorunitario, @quantidadelimite, @imagem)"))
-                    {
-                        cmd.CommandType = CommandType.Text;
-                        cmd.Parameters.AddWithValue("@nome", SqlDbType.VarChar).Value = txtNome.Text;
-                        cmd.Parameters.AddWithValue("@quantidade", SqlDbType.Int).Value = int.Parse(txtQtd.Text);
-                        cmd.Parameters.AddWithValue("@descricao", SqlDbType.VarChar).Value = txtDesc.Text;
-                        cmd.Parameters.AddWithValue("@valorunitario", SqlDbType.Decimal).Value = decimal.Parse(txtVunit.Text);
-                        cmd.Parameters.AddWithValue("@quantidadelimite", SqlDbType.Int).Value = int.Parse(txtLimit.Text);
-                        cmd.Parameters.AddWithValue("@imagem", SqlDbType.Image).Value = imgarray;
-                        cmd.Connection = con;
-                        con.Open();
-                        cmd.ExecuteNonQuery();
-                        con.Close();
-                    }
-                }
+                
         }
-    }
-    public class Produto
-    {
-        public string Nome { get; set; }
-        public string Quantidade { get; set; }
-        public string Descricao { get; set; }
-        public string ValorUnitario { get; set; }
-        public string QuantidadeLimite { get; set; }
-        public string Imagem { get; set; }
+
+        [WebMethod]
+        public static void SaveProd(string Nome, int Quantidade, string Descricao, decimal ValorUnitario, int QuantidadeLimite, string Imagem)
+        {
+            byte[] bytes = Convert.FromBase64String(Imagem);
+            string constr = ConfigurationManager.ConnectionStrings["DBEcommerce - Work"].ConnectionString;
+
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand("INSERT INTO produto VALUES(@nome, @quantidade, @descricao, @valorunitario, @quantidadelimite, @imagem)"))
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.AddWithValue("@nome", Nome);
+                    cmd.Parameters.AddWithValue("@quantidade", Quantidade);
+                    cmd.Parameters.AddWithValue("@descricao", Descricao);
+                    cmd.Parameters.AddWithValue("@valorunitario", ValorUnitario);
+                    cmd.Parameters.AddWithValue("@quantidadelimite", QuantidadeLimite);
+                    cmd.Parameters.AddWithValue("@imagem", bytes);
+                    cmd.Connection = con;
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
+        }
     }
 }

@@ -156,19 +156,41 @@
     <script src="../Scripts/Pages/Pedido.js"></script>
 
     <script>
+        var id = document.getElementById('<%= dropProduto.ClientID %>').selectedIndex;
+        var pedido_id = "";
+        var qtd = document.getElementById('<%= txtQtd.ClientID %>').value;
+        var vunit = document.getElementById('<%= txtVunit.ClientID %>').value;
+        var alertPlaceholder = document.getElementById('displayMyAlert')
+        var count = 0;
+
         $("#btnInsert").click(function (e) {
             e.preventDefault();
 
-            $("#itemsPedido").show();
+            if (qtd == "" || vunit == "" || id < 0) {
+                if (count == 0) {
+                    function alert() {
+                        var wrapper = document.createElement('div')
+                        wrapper.innerHTML = '<div class="alert alert-danger alert-dismissible d-flex align-items-center" id="myAlert" role="alert">' + '<i class="fa-solid fa-triangle-exclamation bi flex-shrink-0 me-2" role="img" aria-label="Danger:"></i>' + '<div>Por favor, preencha todos os campos.</div>' + '<button type="button" id="alertClose" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
 
-            var rows = "";
-            var id = document.getElementById('<%= dropProduto.ClientID %>').selectedIndex;
-            var pedido_id = "";
-            var qtd = document.getElementById('<%= txtQtd.ClientID %>').value;
-            var vunit = document.getElementById('<%= txtVunit.ClientID %>').value;
+                        alertPlaceholder.append(wrapper)
+                    }
+                    alert();
+                    count++
+                }
+                $('#myAlert').on('closed.bs.alert', function (e) {
+                    e.preventDefault();
+                    count = 0
+                });
 
-            rows += "<tr><td>" + id + "</td><td>" + pedido_id + "</td><td>" + qtd + "</td><td>" + vunit + "</td></tr>";
-            $(rows).appendTo("#itemsPedido tbody");
+            }
+            else {
+                $("#itemsPedido").show();
+
+                var rows = "";
+
+                rows += "<tr><td>" + id + "</td><td>" + pedido_id + "</td><td>" + qtd + "</td><td>" + vunit + "</td></tr>";
+                $(rows).appendTo("#itemsPedido tbody");
+            }
         });
     </script>
 </body>

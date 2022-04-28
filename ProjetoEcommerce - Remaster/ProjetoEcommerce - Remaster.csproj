@@ -80,7 +80,7 @@
     <Content Include="Content\css\cliente.css" />
     <Content Include="Content\css\default.css" />
     <Content Include="Content\css\e-pedido.css" />
-    <Content Include="Content\css\produto.css" />
+    <Content Include="Content\css\e-produto.css" />
     <Content Include="Content\css\tipopag.css" />
     <Content Include="Content\img\ecommerce-icon.png" />
     <Content Include="Content\jquery-ui\datepicker-pt-BR.js" />
