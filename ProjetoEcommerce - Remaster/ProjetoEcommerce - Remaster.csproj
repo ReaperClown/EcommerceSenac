@@ -99,9 +99,13 @@
     <Content Include="Content\jquery-ui\images\ui-icons_ededed_256x240.png" />
     <Content Include="Content\jquery-ui\images\ui-icons_ffcf29_256x240.png" />
     <Content Include="Content\jquery-ui\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\jquery-ui\jquery-ui-full.css" />
+    <Content Include="Content\jquery-ui\jquery-ui-full.js" />
     <Content Include="Content\jquery-ui\jquery-ui.css" />
     <Content Include="Content\jquery-ui\jquery-ui.js" />
+    <Content Include="Content\jquery-ui\jquery-ui.structure-full.css" />
     <Content Include="Content\jquery-ui\jquery-ui.structure.css" />
+    <Content Include="Content\jquery-ui\jquery-ui.theme-full.css" />
     <Content Include="Content\jquery-ui\jquery-ui.theme.css" />
     <Content Include="Content\vendor\bootstrap.css" />
     <Content Include="Content\vendor\bootstrap.min.css" />

@@ -13,9 +13,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet" />
 
     <link href="../Content/css/e-produto.css" rel="stylesheet" />
-    <%--<link href="../Content/jquery-ui/jquery-ui.css" rel="stylesheet" />
-    <link href="../Content/jquery-ui/jquery-ui.structure.css" rel="stylesheet" />
-    <link href="../Content/jquery-ui/jquery-ui.theme.css" rel="stylesheet" />--%>
+    <link href="../Content/jquery-ui/jquery-ui-full.css" rel="stylesheet" />
+    <link href="../Content/jquery-ui/jquery-ui.structure-full.css" rel="stylesheet" />
+    <link href="../Content/jquery-ui/jquery-ui.theme-full.css" rel="stylesheet" />
 
     <title>Produto</title>
 </head>
@@ -102,26 +102,76 @@
                         <asp:TemplateField>
                             <HeaderTemplate>Imagem</HeaderTemplate>
                             <ItemTemplate>
-                                <div class="img-container">
+                                <div class="img-container" id="img-placeholder" data-toggle="tooltip" data-placement="top" title="Clique na imagem para redimensioná-la">
                                     <img class="prodImg" src='data:image/jpg;base64,<%# Eval("imagem") != System.DBNull.Value ? Convert.ToBase64String((byte[])Eval("imagem")) : string.Empty %>' alt="image" />
+                                </div>
+                                <div class="modal fade" id="imgModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <img src='data:image/jpg;base64,<%# Eval("imagem") != System.DBNull.Value ? Convert.ToBase64String((byte[])Eval("imagem")) : string.Empty %>' alt="image" />
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fechar</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
+                <div id="dialog" style="display: none"></div>
                 <asp:SqlDataSource ID="DataSourceProduct" runat="server" ConnectionString="<%$ ConnectionStrings:DBEcommerce - Work %>" SelectCommand="SELECT * FROM [produto]"></asp:SqlDataSource>
             </div>
         </div>
         <TFooter:footer runat="server" ID="Footer" />
     </form>
     <script src="../Scripts/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/json2/20160511/json2.min.js"></script>
-    <script src="../Scripts/bootstrap.min.js"></script>
-    <script src="../Scripts/bootstrap-filestyle.min.js"></script>
+    <script src="../Content/jquery-ui/jquery-ui-full.js"></script>
     <script src="../Scripts/popper.min.js"></script>
+    <script src="../Scripts/bootstrap.js"></script>
+    <script src="../Scripts/bootstrap-filestyle.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/json2/20160511/json2.min.js"></script>
     <script type="text/javascript">
         $(":file").filestyle({ text: "Procurar" });
         $(":file").filestyle({ placeholder: "Nenhum arquivo selecionado" });
+
+        $(document).ready(function () {
+            $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+
+            $("#dialog").dialog({
+                dialogClass: "no-close",
+                autoOpen: false,
+                modal: true,
+                height: 600,
+                width: 600,
+                title: "Imagem",
+                buttons: [
+                    {
+                        text: "Fechar",
+                        icon: "ui-icon-heart",
+                        click: function () {
+                            $(this).dialog("close");
+                        }
+                    }
+                ]
+            });
+            $("[id*=gvProduto] img").click(function () {
+                $('#dialog').html('');
+                $('#dialog').append($(this).clone());
+                $('#dialog').dialog('open');
+                $('.ui-dialog-buttonset button').addClass('btn btn-primary closeImg');
+
+                // <---- Custom Size ---->
+                //var width = $("#dialog").dialog("option", "width");
+                //$("#dialog").dialog("option", "width", 100);
+            });
+        });
 
         $(function () {
             var reader = new FileReader();

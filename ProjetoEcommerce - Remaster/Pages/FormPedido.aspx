@@ -21,6 +21,9 @@
         .ui-datepicker-title select {
             display: inline;
         }
+        .auto-style3 {
+            width: 215px;
+        }
     </style>
     <title>Pedido</title>
 </head>
@@ -38,30 +41,32 @@
                             </th>
                         </tr>
                         <tr>
-                            <td style="width: 300px">
+                            <td class="auto-style3">
                                 <asp:Label ID="Label2" runat="server" Text="Cliente"></asp:Label>
                             </td>
                             <td style="width: 275px">
                                 <asp:DropDownList ID="dropCliente" CssClass="form-select" runat="server">
                                 </asp:DropDownList>
                             </td>
-                            <td style="width: 300px">
+                            <td class="auto-style3">
                                 <asp:Label ID="Label5" runat="server" Text="Produto"></asp:Label>
                             </td>
-                            <td style="width: 275px">
-                                <asp:DropDownList ID="dropProduto" CssClass="form-select" runat="server">
+                            <td class="tdProd">
+                                <asp:DropDownList ID="dropProduto" CssClass="form-select" runat="server" DataSourceID="DataSourcePedido" DataTextField="nome" DataValueField="id">
                                 </asp:DropDownList>
+                                <asp:SqlDataSource ID="DataSourcePedido" runat="server" ConnectionString="<%$ ConnectionStrings:DBEcommerce - Work %>" SelectCommand="SELECT [id], [nome] FROM [produto]"></asp:SqlDataSource>
+                                <img src="https://source.unsplash.com/random/300×300" alt="imagem" width="50" height="50" class="prodImg" id="pImg" />
                             </td>
                         </tr>
                         <tr>
-                            <td style="width: 300px">
+                            <td class="auto-style3">
                                 <asp:Label ID="Label3" runat="server" Text="Tipo de Pagamento"></asp:Label>
                             </td>
                             <td style="width: 275px">
                                 <asp:DropDownList ID="dropPagamento" CssClass="form-select" runat="server">
                                 </asp:DropDownList>
                             </td>
-                            <td style="width: 300px">
+                            <td class="auto-style3">
                                 <asp:Label ID="Label6" runat="server" Text="Quantidade"></asp:Label>
                             </td>
                             <td style="width: 275px">
@@ -69,13 +74,13 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="width: 300px">
+                            <td class="auto-style3">
                                 <asp:Label ID="Label4" runat="server" Text="Valor Unitário"></asp:Label>
                             </td>
                             <td style="width: 275px">
                                 <asp:TextBox ID="txtVunit" CssClass="form-control" runat="server"></asp:TextBox>
                             </td>
-                            <td style="width: 300px">
+                            <td class="auto-style3">
                                 <asp:Label ID="Label7" runat="server" Text="Subtotal"></asp:Label>
                             </td>
                             <td style="width: 275px">
@@ -83,13 +88,13 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="width: 300px">
+                            <td class="auto-style3">
                                 <asp:Label ID="Label8" runat="server" Text="Valor Total"></asp:Label>
                             </td>
                             <td style="width: 275px">
                                 <asp:TextBox ID="txtTotal" CssClass="form-control" runat="server"></asp:TextBox>
                             </td>
-                            <td style="width: 300px">
+                            <td class="auto-style3">
                                 <asp:Label ID="Label9" runat="server" Text="Data do Pedido"></asp:Label>
                             </td>
                             <td style="width: 275px">
@@ -100,14 +105,14 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="width: 300px">
+                            <td class="auto-style3">
                                 <asp:Label ID="Label10" runat="server" Text="Label"></asp:Label>
                             </td>
                             <td class="align-middle" style="width: 275px">
                                 <asp:DropDownList ID="DropDownList4" CssClass="form-select" runat="server">
                                 </asp:DropDownList>
                             </td>
-                            <td style="width: 300px">
+                            <td class="auto-style3">
                                 <asp:Label ID="Label11" runat="server" Text="Label"></asp:Label>
                             </td>
                             <td style="width: 275px">

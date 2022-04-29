@@ -78,6 +78,15 @@ namespace ProjetoEcommerce___Remaster
         protected global::System.Web.UI.WebControls.DropDownList dropProduto;
 
         /// <summary>
+        /// DataSourcePedido control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource DataSourcePedido;
+
+        /// <summary>
         /// Label3 control.
         /// </summary>
         /// <remarks>

@@ -2,6 +2,11 @@
     width: 100%;
 }
 
+.my-table tr td input, .my-table tr td select, .my-table tr td .input-group {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .table-condensed tr th {
     border: 0px solid #1c1b1b;
     color: white;
@@ -23,21 +28,28 @@
     display: none;
 }
 
+.input-group {
+    width: 280px;
+}
+
+.tdProd {
+    width: auto;
+    display: flex;
+    align-items: center;
+    -webkit-justify-content: inherit;
+    justify-content: inherit;
+}
+
+.prodImg {
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+.form-select {
+    width: 200px !important;
+}
+
 .table-tipopag a {
     text-decoration: none;
     color: aquamarine;
-}
-
-#btnInsertCli, #btnInsertPro {
-    display: none;
-}
-
-#btnCleanCli, #btnCleanPro {
-    display: none
-}
-
-#TextBox5 .ajax__calendar_body {
-    width: 2900px;
-    background: white;
-    border: 1px black;
 }
