@@ -12,6 +12,7 @@ namespace ProjetoEcommerce___Prototype
             get
             {
                 return System.Configuration.ConfigurationManager.ConnectionStrings["DBEcommerce"].ConnectionString;
+                //return System.Configuration.ConfigurationManager.ConnectionStrings["DBEcommerce - Work"].ConnectionString;
             }
         }
     }

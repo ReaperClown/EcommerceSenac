@@ -46,8 +46,10 @@
                                 <asp:Label ID="Label2" runat="server" Text="Cliente"></asp:Label>
                             </td>
                             <td style="width: 275px">
-                                <asp:DropDownList ID="dropCliente" CssClass="form-select" runat="server">
+                                <asp:DropDownList ID="dropCliente" CssClass="form-select" runat="server" DataSourceID="DataSourceCliente" DataTextField="nome" DataValueField="id">
                                 </asp:DropDownList>
+                                <asp:SqlDataSource ID="DataSourceCliente" runat="server" ConnectionString="<%$ ConnectionStrings:DBEcommerce %>" SelectCommand="SELECT [id], [nome] FROM [cliente]"></asp:SqlDataSource>
+                                <asp:Label ID="lblAddress" runat="server" Text="Label"></asp:Label>
                             </td>
                             <td class="auto-style3">
                                 <asp:Label ID="Label5" runat="server" Text="Produto"></asp:Label>
@@ -55,7 +57,7 @@
                             <td class="tdProd">
                                 <asp:DropDownList ID="dropProduto" CssClass="form-select" runat="server" DataSourceID="DataSourcePedido" DataTextField="nome" DataValueField="id">
                                 </asp:DropDownList>
-                                <asp:SqlDataSource ID="DataSourcePedido" runat="server" ConnectionString="<%$ ConnectionStrings:DBEcommerce - Work %>" SelectCommand="SELECT [id], [nome] FROM [produto]"></asp:SqlDataSource>
+                                <asp:SqlDataSource ID="DataSourcePedido" runat="server" ConnectionString="<%$ ConnectionStrings:DBEcommerce %>" SelectCommand="SELECT [id], [nome] FROM [produto]"></asp:SqlDataSource>
                                 <div class="imgDiv" data-toggle="tooltip" data-placement="right" title="Clique na imagem para redimensioná-la">
                                     <div id="imgPlaceholder" class="display"></div>
                                 </div>
@@ -176,6 +178,33 @@
 
         $(document).ready(function () {
             $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+
+            $("#dropCliente").change(function (event) {
+                var id = $("#dropCliente option:selected").val();
+                event.preventDefault();
+                alert("id:" + id);
+                var ajaxOptions = {
+                    type: 'POST',
+                    url: "Pages/GetAddress.asmx/getAddress",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: '{id: "' + id + '" }',
+                    success: function (data) {
+                        console.log(data);
+                        var jqueryXml = $(data);
+                        $('[id=*lblAddress]').val(jqueryXml.find('endereco').text());
+                    },
+                    failure: function (data) {
+                        console.log(data);
+                    },
+                    error: function (data) {
+                        console.log(data);
+                    }
+                };
+                console.log('my data: ' + ajaxOptions.url + ' ' + JSON.stringify(ajaxOptions.data));
+                $.ajax(ajaxOptions);
+                return false;
+            });
 
             $('#dropProduto').on('change', function (e) {
                 $('.display').text('');

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjetoEcommerce___Prototype;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,6 +14,7 @@ namespace ProjetoEcommerce___Remaster.Pages
 {
     public partial class FormProduto : System.Web.UI.Page
     {
+        Utilities utils = new Utilities();
         protected void Page_Load(object sender, EventArgs e)
         {
             gvProduto.DataSource = null;
@@ -59,9 +61,9 @@ namespace ProjetoEcommerce___Remaster.Pages
         public static void SaveProd(string Nome, int Quantidade, string Descricao, decimal ValorUnitario, int QuantidadeLimite, string Imagem)
         {
             byte[] bytes = Convert.FromBase64String(Imagem);
-            string constr = ConfigurationManager.ConnectionStrings["DBEcommerce - Work"].ConnectionString;
+            Utilities utils = new Utilities();
 
-            using (SqlConnection con = new SqlConnection(constr))
+            using (SqlConnection con = new SqlConnection(utils.connection))
             {
                 using (SqlCommand cmd = new SqlCommand("INSERT INTO produto VALUES(@nome, @quantidade, @descricao, @valorunitario, @quantidadelimite, @imagem)"))
                 {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjetoEcommerce___Prototype;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -13,7 +14,7 @@ namespace ProjetoEcommerce___Remaster
     /// </summary>
     public class GetImage : IHttpHandler
     {
-
+        Utilities utils = new Utilities();
         public void ProcessRequest(HttpContext context)
         {
             Int32 id;
@@ -36,8 +37,7 @@ namespace ProjetoEcommerce___Remaster
 
         public Stream DisplayImage(int id)
         {
-            string cs = ConfigurationManager.ConnectionStrings["DBEcommerce - Work"].ConnectionString;
-            using (SqlConnection connection = new SqlConnection(cs))
+            using (SqlConnection connection = new SqlConnection(utils.connection))
             {
                 string sql = "SELECT imagem FROM produto WHERE id = @id";
                 using (SqlCommand cmd = new SqlCommand(sql, connection))

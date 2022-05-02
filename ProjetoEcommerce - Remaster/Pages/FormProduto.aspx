@@ -126,7 +126,7 @@
                     </Columns>
                 </asp:GridView>
                 <div id="dialog" style="display: none"></div>
-                <asp:SqlDataSource ID="DataSourceProduct" runat="server" ConnectionString="<%$ ConnectionStrings:DBEcommerce - Work %>" SelectCommand="SELECT * FROM [produto]"></asp:SqlDataSource>
+                <asp:SqlDataSource ID="DataSourceProduct" runat="server" ConnectionString="<%$ ConnectionStrings:DBEcommerce %>" SelectCommand="SELECT * FROM [produto]"></asp:SqlDataSource>
             </div>
         </div>
         <TFooter:footer runat="server" ID="Footer" />
