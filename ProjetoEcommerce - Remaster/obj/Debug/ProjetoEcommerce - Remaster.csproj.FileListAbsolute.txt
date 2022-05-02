@@ -124,6 +124,7 @@ C:\Users\willian.gamesquita\source\repos\ProjetoEcommerce - Remaster\ProjetoEcom
 C:\Users\willian.gamesquita\source\repos\ProjetoEcommerce - Remaster\ProjetoEcommerce - Remaster\obj\Debug\ProjetoEcommerce - Remaster.dll
 C:\Users\willian.gamesquita\source\repos\ProjetoEcommerce - Remaster\ProjetoEcommerce - Remaster\obj\Debug\ProjetoEcommerce - Remaster.pdb
 C:\Users\willian.gamesquita\source\repos\ProjetoEcommerce - Remaster\ProjetoEcommerce - Remaster\obj\Debug\ProjetoEcommerce - Remaster.csproj.AssemblyReference.cache
+C:\Users\WillianMesquitaInfoh\source\repos\EcommerceSENAC-New\ProjetoEcommerce - Remaster\obj\Debug\ProjetoEcommerce - Remaster.csproj.CoreCompileInputs.cache
 C:\Users\WillianMesquitaInfoh\source\repos\EcommerceSENAC-New\ProjetoEcommerce - Remaster\bin\ProjetoEcommerce - Remaster.dll.config
 C:\Users\WillianMesquitaInfoh\source\repos\EcommerceSENAC-New\ProjetoEcommerce - Remaster\bin\ProjetoEcommerce - Remaster.dll
 C:\Users\WillianMesquitaInfoh\source\repos\EcommerceSENAC-New\ProjetoEcommerce - Remaster\bin\ProjetoEcommerce - Remaster.pdb
@@ -182,8 +183,6 @@ C:\Users\WillianMesquitaInfoh\source\repos\EcommerceSENAC-New\ProjetoEcommerce -
 C:\Users\WillianMesquitaInfoh\source\repos\EcommerceSENAC-New\ProjetoEcommerce - Remaster\bin\Microsoft.ScriptManager.WebForms.dll
 C:\Users\WillianMesquitaInfoh\source\repos\EcommerceSENAC-New\ProjetoEcommerce - Remaster\bin\Microsoft.AspNet.FriendlyUrls.xml
 C:\Users\WillianMesquitaInfoh\source\repos\EcommerceSENAC-New\ProjetoEcommerce - Remaster\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\WillianMesquitaInfoh\source\repos\EcommerceSENAC-New\ProjetoEcommerce - Remaster\obj\Debug\ProjetoEcommerce - Remaster.csproj.CoreCompileInputs.cache
 C:\Users\WillianMesquitaInfoh\source\repos\EcommerceSENAC-New\ProjetoEcommerce - Remaster\obj\Debug\ProjetoEcommerce - Remaster.csproj.CopyComplete
 C:\Users\WillianMesquitaInfoh\source\repos\EcommerceSENAC-New\ProjetoEcommerce - Remaster\obj\Debug\ProjetoEcommerce - Remaster.dll
 C:\Users\WillianMesquitaInfoh\source\repos\EcommerceSENAC-New\ProjetoEcommerce - Remaster\obj\Debug\ProjetoEcommerce - Remaster.pdb
-C:\Users\WillianMesquitaInfoh\source\repos\EcommerceSENAC-New\ProjetoEcommerce - Remaster\obj\Debug\ProjetoEcommerce - Remaster.csproj.AssemblyReference.cache

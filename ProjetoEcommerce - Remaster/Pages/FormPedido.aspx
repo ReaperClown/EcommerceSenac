@@ -13,14 +13,15 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet" />
 
     <link href="../Content/css/e-pedido.css" rel="stylesheet" />
-    <link href="../Content/jquery-ui/jquery-ui.css" rel="stylesheet" />
-    <link href="../Content/jquery-ui/jquery-ui.structure.css" rel="stylesheet" />
-    <link href="../Content/jquery-ui/jquery-ui.theme.css" rel="stylesheet" />
+    <link href="../Content/jquery-ui/jquery-ui-full.css" rel="stylesheet" />
+    <link href="../Content/jquery-ui/jquery-ui.structure-full.css" rel="stylesheet" />
+    <link href="../Content/jquery-ui/jquery-ui.theme-full.css" rel="stylesheet" />
 
     <style>
         .ui-datepicker-title select {
             display: inline;
         }
+
         .auto-style3 {
             width: 215px;
         }
@@ -55,7 +56,9 @@
                                 <asp:DropDownList ID="dropProduto" CssClass="form-select" runat="server" DataSourceID="DataSourcePedido" DataTextField="nome" DataValueField="id">
                                 </asp:DropDownList>
                                 <asp:SqlDataSource ID="DataSourcePedido" runat="server" ConnectionString="<%$ ConnectionStrings:DBEcommerce - Work %>" SelectCommand="SELECT [id], [nome] FROM [produto]"></asp:SqlDataSource>
-                                <img src="https://source.unsplash.com/random/300×300" alt="imagem" width="50" height="50" class="prodImg" id="pImg" />
+                                <div class="imgDiv" data-toggle="tooltip" data-placement="right" title="Clique na imagem para redimensioná-la">
+                                    <div id="imgPlaceholder" class="display"></div>
+                                </div>
                             </td>
                         </tr>
                         <tr>
@@ -122,28 +125,29 @@
                         <tr>
                             <td colspan="2" style="text-align: right">
                                 <button class="btn btn-success" runat="server" id="btnInsert">Inserir</button>
-                                </td>
+                            </td>
                             <td colspan="2" style="text-align: left">
                                 <button class="btn btn-danger" runat="server" id="btnClean">Limpar</button>
 
-                                </td>
+                            </td>
                         </tr>
                         <tr>
                             <td colspan="4">
                                 <div class="table-responsive">
                                     <table class="table table-bordered align-middle text-center my-table" style="width: 600px;" runat="server" id="itemsPedido">
-                                    <tr>
-                                        <th colspan="4" style="text-transform: uppercase">Items do Pedido</th>
-                                    </tr>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>ID do Pedido</th>
-                                        <th>Quantidade</th>
-                                        <th>Valor Unitário</th>
-                                    </tr>
-                                    <tbody>
-                                    </tbody>
-                                </table>
+                                        <tr>
+                                            <th colspan="4" style="text-transform: uppercase">Items do Pedido</th>
+                                        </tr>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>ID do Pedido</th>
+                                            <th>Quantidade</th>
+                                            <th>Valor Unitário</th>
+                                        </tr>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                    <div id="dialog" style="display: none"></div>
                                 </div>
                             </td>
                         </tr>
@@ -154,10 +158,11 @@
         <TFooter:footer ID="myFooter" runat="server" />
     </form>
     <script src="../Scripts/jquery-3.6.0.min.js"></script>
-    <script src="../Content/jquery-ui/jquery-ui.js"></script>
+    <script src="../Content/jquery-ui/jquery-ui-full.js"></script>
+    <script src="../Scripts/jquery.dialogextend.js"></script>
     <script src="../Content/jquery-ui/datepicker-pt-BR.js"></script>
-    <script src="../Scripts/bootstrap.min.js"></script>
     <script src="../Scripts/popper.min.js"></script>
+    <script src="../Scripts/bootstrap.min.js"></script>
     <script src="../Scripts/Pages/Pedido.js"></script>
 
     <script>
@@ -165,8 +170,69 @@
         var pedido_id = "";
         var qtd = document.getElementById('<%= txtQtd.ClientID %>').value;
         var vunit = document.getElementById('<%= txtVunit.ClientID %>').value;
-        var alertPlaceholder = document.getElementById('displayMyAlert')
+        var alertPlaceholder = document.getElementById('displayMyAlert');
+        var myImg;
         var count = 0;
+
+        $(document).ready(function () {
+            $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+
+            $('#dropProduto').on('change', function (e) {
+                $('.display').text('');
+                var ID = $("#dropProduto option:selected").val();
+                if (ID.length > 0) {
+                    var newImage = $('<img />');
+                    newImage.attr('src', 'GetImage.ashx?id=' + ID);
+                    newImage.attr('class', 'Img');
+                    newImage.attr('id', 'myImg');
+                    $('.display').append(newImage);
+                }
+                e.preventDefault();
+            });
+
+            $("#dialog").dialog({
+                dialogClass: "no-close",
+                autoOpen: false,
+                modal: true,
+                height: 600,
+                width: 600,
+                title: "Imagem",
+                buttons: [
+                    {
+                        text: "Restaurar",
+                        click: function () {
+                            $(this).dialogExtend("restore");
+                        }
+                    },
+                    {
+                        text: "Fechar",
+                        icon: "ui-icon-heart",
+                        click: function () {
+                            $(this).dialog("close");
+                        }
+                    }
+                ],
+                close: function () {
+                    $('.prodImg').removeClass('prodImgAlt');
+                }
+            }).dialogExtend({
+                "maximizable": true,
+                "icons": { "maximize": "ui-icon-arrow-4-diag" },
+                "minimizable": true,
+                "collapsable" : true,
+                "dblclick" : "collapse",
+            });
+
+            $(".imgDiv").click(function () {
+                $('#dialog').html('');
+                $('#dialog').append($('.display').clone());
+                $('.prodImg').addClass('prodImgAlt');
+                $('#dialog').dialog('open');
+                $('.ui-dialog-buttonset button:last').addClass('btn btn-secondary');
+                $('.ui-dialog-buttonset button:first').addClass('btn btn-primary closeImg');
+            });
+
+        })
 
         $("#btnInsert").click(function (e) {
             e.preventDefault();

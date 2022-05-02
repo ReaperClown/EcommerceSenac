@@ -126,6 +126,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
+    <Content Include="Scripts\jquery.dialogextend.js" />
     <Content Include="Scripts\Pages\Pedido.js" />
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
@@ -158,6 +159,9 @@
     </Compile>
     <Compile Include="Components\Footer.ascx.designer.cs">
       <DependentUpon>Footer.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="GetImage.ashx.cs">
+      <DependentUpon>GetImage.ashx</DependentUpon>
     </Compile>
     <Compile Include="ItemPedido.cs" />
     <Compile Include="Pages\FormPedido.aspx.cs">
@@ -196,6 +200,7 @@
     <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="GetImage.ashx" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
