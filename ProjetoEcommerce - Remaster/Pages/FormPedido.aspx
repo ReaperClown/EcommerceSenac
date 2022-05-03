@@ -49,7 +49,13 @@
                                 <asp:DropDownList ID="dropCliente" CssClass="form-select" runat="server" DataSourceID="DataSourceCliente" DataTextField="nome" DataValueField="id">
                                 </asp:DropDownList>
                                 <asp:SqlDataSource ID="DataSourceCliente" runat="server" ConnectionString="<%$ ConnectionStrings:DBEcommerce %>" SelectCommand="SELECT [id], [nome] FROM [cliente]"></asp:SqlDataSource>
-                                <asp:Label ID="lblAddress" runat="server" Text="Label"></asp:Label>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
                             </td>
                             <td class="auto-style3">
                                 <asp:Label ID="Label5" runat="server" Text="Produto"></asp:Label>
@@ -72,7 +78,8 @@
                                 </asp:DropDownList>
                             </td>
                             <td class="auto-style3">
-                                <asp:Label ID="Label6" runat="server" Text="Quantidade"></asp:Label>
+                                <span class="qtdStock">Quantidade</span><br />
+                                <span class="badge bg-secondary qtdProd"></span>
                             </td>
                             <td style="width: 275px">
                                 <asp:TextBox ID="txtQtd" CssClass="form-control" runat="server"></asp:TextBox>
@@ -135,6 +142,7 @@
                         </tr>
                         <tr>
                             <td colspan="4">
+                                <div id="displayMyAlert"></div>
                                 <div class="table-responsive">
                                     <table class="table table-bordered align-middle text-center my-table" style="width: 600px;" runat="server" id="itemsPedido">
                                         <tr>
@@ -169,99 +177,8 @@
 
     <script>
         var id = document.getElementById('<%= dropProduto.ClientID %>').selectedIndex;
-        var pedido_id = "";
         var qtd = document.getElementById('<%= txtQtd.ClientID %>').value;
         var vunit = document.getElementById('<%= txtVunit.ClientID %>').value;
-        var alertPlaceholder = document.getElementById('displayMyAlert');
-        var myImg;
-        var count = 0;
-
-        $(document).ready(function () {
-            $("body").tooltip({ selector: '[data-toggle=tooltip]' });
-
-            $("#dropCliente").change(function (event) {
-                var id = $("#dropCliente option:selected").val();
-                event.preventDefault();
-                alert("id:" + id);
-                var ajaxOptions = {
-                    type: 'POST',
-                    url: "Pages/GetAddress.asmx/getAddress",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    data: '{id: "' + id + '" }',
-                    success: function (data) {
-                        console.log(data);
-                        var jqueryXml = $(data);
-                        $('[id=*lblAddress]').val(jqueryXml.find('endereco').text());
-                    },
-                    failure: function (data) {
-                        console.log(data);
-                    },
-                    error: function (data) {
-                        console.log(data);
-                    }
-                };
-                console.log('my data: ' + ajaxOptions.url + ' ' + JSON.stringify(ajaxOptions.data));
-                $.ajax(ajaxOptions);
-                return false;
-            });
-
-            $('#dropProduto').on('change', function (e) {
-                $('.display').text('');
-                var ID = $("#dropProduto option:selected").val();
-                if (ID.length > 0) {
-                    var newImage = $('<img />');
-                    newImage.attr('src', 'GetImage.ashx?id=' + ID);
-                    newImage.attr('class', 'Img');
-                    newImage.attr('id', 'myImg');
-                    $('.display').append(newImage);
-                }
-                e.preventDefault();
-            });
-
-            $("#dialog").dialog({
-                dialogClass: "no-close",
-                autoOpen: false,
-                modal: true,
-                height: 600,
-                width: 600,
-                title: "Imagem",
-                buttons: [
-                    {
-                        text: "Restaurar",
-                        click: function () {
-                            $(this).dialogExtend("restore");
-                        }
-                    },
-                    {
-                        text: "Fechar",
-                        icon: "ui-icon-heart",
-                        click: function () {
-                            $(this).dialog("close");
-                        }
-                    }
-                ],
-                close: function () {
-                    $('.prodImg').removeClass('prodImgAlt');
-                }
-            }).dialogExtend({
-                "maximizable": true,
-                "icons": { "maximize": "ui-icon-arrow-4-diag" },
-                "minimizable": true,
-                "collapsable" : true,
-                "dblclick" : "collapse",
-            });
-
-            $(".imgDiv").click(function () {
-                $('#dialog').html('');
-                $('#dialog').append($('.display').clone());
-                $('.prodImg').addClass('prodImgAlt');
-                $('#dialog').dialog('open');
-                $('.ui-dialog-buttonset button:last').addClass('btn btn-secondary');
-                $('.ui-dialog-buttonset button:first').addClass('btn btn-primary closeImg');
-            });
-
-        })
 
         $("#btnInsert").click(function (e) {
             e.preventDefault();

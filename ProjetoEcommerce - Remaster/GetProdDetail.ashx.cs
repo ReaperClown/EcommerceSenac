@@ -9,9 +9,9 @@ using System.Web.Script.Serialization;
 namespace ProjetoEcommerce___Remaster
 {
     /// <summary>
-    /// Descrição resumida de GetAddress
+    /// Descrição resumida de GetProdDetail
     /// </summary>
-    public class GetAddress : IHttpHandler
+    public class GetProdDetail : IHttpHandler
     {
         Utilities utils = new Utilities();
         public void ProcessRequest(HttpContext context)
@@ -26,12 +26,12 @@ namespace ProjetoEcommerce___Remaster
 
         private string GetCustomersJSON(int id)
         {
-            List<object> cliente = new List<object>();
+            List<object> prod = new List<object>();
             using (SqlConnection conn = new SqlConnection(utils.connection))
             {
                 using (SqlCommand cmd = new SqlCommand())
                 {
-                    cmd.CommandText = "SELECT * FROM cliente WHERE id = @id";
+                    cmd.CommandText = "SELECT quantidade,valorunitario FROM produto WHERE id = @id";
                     cmd.Parameters.AddWithValue("@id", id);
                     cmd.Connection = conn;
                     conn.Open();
@@ -39,19 +39,16 @@ namespace ProjetoEcommerce___Remaster
                     {
                         while (sdr.Read())
                         {
-                            cliente.Add(new
+                            prod.Add(new
                             {
-                                Rua = sdr["rua"],
-                                Numero = sdr["numero"],
-                                CEP = sdr["cep"],
-                                Cidade = sdr["cidade"],
-                                UF = sdr["uf"]
+                                Quantidade = sdr["quantidade"],
+                                ValorUnitario = sdr["valorunitario"],
                             });
                         }
                     }
                     conn.Close();
                 }
-                return (new JavaScriptSerializer().Serialize(cliente));
+                return (new JavaScriptSerializer().Serialize(prod));
             }
         }
 

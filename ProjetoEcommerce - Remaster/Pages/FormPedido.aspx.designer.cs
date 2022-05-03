@@ -69,15 +69,6 @@ namespace ProjetoEcommerce___Remaster
         protected global::System.Web.UI.WebControls.SqlDataSource DataSourceCliente;
 
         /// <summary>
-        /// Controle lblAddress.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAddress;
-
-        /// <summary>
         /// Controle Label5.
         /// </summary>
         /// <remarks>
@@ -121,15 +112,6 @@ namespace ProjetoEcommerce___Remaster
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList dropPagamento;
-
-        /// <summary>
-        /// Controle Label6.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label6;
 
         /// <summary>
         /// Controle txtQtd.

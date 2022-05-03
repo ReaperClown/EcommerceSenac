@@ -166,6 +166,9 @@
     <Compile Include="GetImage.ashx.cs">
       <DependentUpon>GetImage.ashx</DependentUpon>
     </Compile>
+    <Compile Include="GetProdDetail.ashx.cs">
+      <DependentUpon>GetProdDetail.ashx</DependentUpon>
+    </Compile>
     <Compile Include="ItemPedido.cs" />
     <Compile Include="Pages\FormPedido.aspx.cs">
       <DependentUpon>FormPedido.aspx</DependentUpon>
@@ -205,6 +208,7 @@
   <ItemGroup>
     <Content Include="GetImage.ashx" />
     <Content Include="GetAddress.ashx" />
+    <Content Include="GetProdDetail.ashx" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
